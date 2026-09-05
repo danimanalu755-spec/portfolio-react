@@ -145,8 +145,8 @@ function App() {
           <h2>Hubungi Saya</h2>
           <p className="section-intro">Silakan hubungi saya untuk kolaborasi atau sekadar menyapa!</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center', marginTop: '30px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaEnvelope color="#61DAFB" size="20px" /><span>dani.frandi@example.com</span></div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaPhone color="#61DAFB" size="20px" /><span>+62 812-3456-7890</span></div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaEnvelope color="#61DAFB" size="20px" /><span>danimanalu755@gmail.com</span></div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaPhone color="#61DAFB" size="20px" /><span>+62 852-6027-7250</span></div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaMapMarkerAlt color="#E34F26" size="20px" /><span>Sumatera Utara, Indonesia</span></div>
           </div>
         </Reveal>
