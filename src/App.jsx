@@ -9,12 +9,20 @@ function Reveal({ children, className = '' }) {
 
   useEffect(() => {
     if (!elementRef.current) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
-    }, { threshold: 0.1 })
-    observer.observe(elementRef.current)
-    return () => observer.disconnect()
-  }, [])
+    try {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry && entry.isIntersecting) { 
+          setVisible(true); 
+          observer.disconnect(); 
+        }
+      }, { threshold: 0.1 });
+
+      observer.observe(elementRef.current);
+      return () => observer.disconnect();
+    } catch (error) {
+      setVisible(true);
+    }
+  }, []);
 
   return (
     <div ref={elementRef} className={`reveal ${visible ? 'reveal-visible' : ''} ${className}`}>
@@ -26,20 +34,34 @@ function Reveal({ children, className = '' }) {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const closeMenu = () => setMenuOpen(false)
-  const gitLink = "https://github.com";
+  
+  // Tautan dasar ke profil GitHub asli kamu
+  const gitLink = "https://github.com"; 
 
-  const waNumber = "628512345667"; 
-  const waMessage = encodeURIComponent("Halo Dani, saya tertarik untuk bekerja sama.");
-  const waLink = `https://wa.me{waNumber}?text=${waMessage}`;
+  // Tautan Obrolan WhatsApp Langsung (Hardcoded & Aman dari Error Gateway)
+  const waNumber = "6285260277250";
+  const textRaw = "Halo Dani, saya melihat portofolio kamu dan tertarik untuk bekerja sama.";
+  const waLink = `https://wa.me`;
+
+  // Tautan Live Demo Utama Anda di Vercel
+  const demoLink = "https://vercel.app";
 
   const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    return savedTheme ? savedTheme : 'dark';
+    try {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      return savedTheme ? savedTheme : 'dark';
+    } catch (e) {
+      return 'dark';
+    }
   });
 
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-    localStorage.setItem('portfolio-theme', theme);
+    try {
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('portfolio-theme', theme);
+    } catch (e) {
+      console.error("Gagal menyimpan tema:", e);
+    }
   }, [theme]);
 
   return (
@@ -56,10 +78,10 @@ function App() {
             <a href="#contact" onClick={closeMenu}>Contact</a>
           </div>
           <div className="nav-actions">
-            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="theme-toggle">
+            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label="Toggle Theme">
               {theme === 'dark' ? <FaSun color="#F59E0B" /> : <FaMoon />}
             </button>
-            <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle Navigation">
               {menuOpen ? '✕' : '☰'}
             </button>
           </div>
@@ -99,33 +121,45 @@ function App() {
         </Reveal>
         <div className="skills">
           <Reveal className="skill-card">
-            <div className="skill-icon"><FaHtml5 color={theme === 'dark' ? 'var(--accent)' : '#E34F26'} size="40px" /></div>
+            <div className="skill-icon">
+              <FaHtml5 color={theme === 'dark' ? 'var(--accent)' : '#E34F26'} size="40px" />
+            </div>
             <h3>HTML</h3><p>Struktur website</p>
           </Reveal>
           <Reveal className="skill-card">
-            <div className="skill-icon"><FaCss3Alt color={theme === 'dark' ? 'var(--accent)' : '#1572B6'} size="40px" /></div>
+            <div className="skill-icon">
+              <FaCss3Alt color={theme === 'dark' ? 'var(--accent)' : '#1572B6'} size="40px" />
+            </div>
             <h3>CSS</h3><p>Responsive design</p>
           </Reveal>
           <Reveal className="skill-card">
-            <div className="skill-icon"><FaJsSquare color={theme === 'dark' ? 'var(--accent)' : '#F7DF1E'} size="40px" /></div>
+            <div className="skill-icon">
+              <FaJsSquare color={theme === 'dark' ? 'var(--accent)' : '#F7DF1E'} size="40px" />
+            </div>
             <h3>JavaScript</h3><p>Logika website</p>
           </Reveal>
           <Reveal className="skill-card">
-            <div className="skill-icon"><FaReact color={theme === 'dark' ? 'var(--accent)' : '#61DAFB'} size="40px" /></div>
+            <div className="skill-icon">
+              <FaReact color={theme === 'dark' ? 'var(--accent)' : '#61DAFB'} size="40px" />
+            </div>
             <h3>React JS</h3><p>Aplikasi web modern</p>
           </Reveal>
           <Reveal className="skill-card">
-            <div className="skill-icon"><FaGitAlt color={theme === 'dark' ? 'var(--accent)' : '#F05032'} size="40px" /></div>
+            <div className="skill-icon">
+              <FaGitAlt color={theme === 'dark' ? 'var(--accent)' : '#F05032'} size="40px" />
+            </div>
             <h3>Git</h3><p>Version control</p>
           </Reveal>
           <Reveal className="skill-card">
-            <div className="skill-icon"><FaGithub color={theme === 'dark' ? 'var(--accent)' : '#181717'} size="40px" /></div>
+            <div className="skill-icon">
+              <FaGithub color={theme === 'dark' ? 'var(--accent)' : '#181717'} size="40px" />
+            </div>
             <h3>GitHub</h3><p>Kelola project</p>
           </Reveal>
         </div>
       </section>
 
-            {/* PROJECTS */}
+      {/* PROJECTS */}
       <section id="projects" className="section">
         <Reveal>
           <h2>My Projects</h2>
@@ -133,7 +167,7 @@ function App() {
         </Reveal>
         <div className="projects">
           
-          {/* PROJECT 1: Personal Portfolio */}
+          {/* PROJECT 1 */}
           <Reveal className="project-card">
             <div className="project-image"><img src="/projects/portfolio.jpg" alt="Personal Portfolio" /></div>
             <div className="project-content">
@@ -141,14 +175,13 @@ function App() {
               <p>Website portofolio responsif dengan animasi scroll interaktif modern (Reveal Effect).</p>
               <div className="project-tech"><span>React</span><span>JavaScript</span><span>CSS3</span></div>
               <div className="project-buttons">
-                {/* GANTI DI SINI: Masukkan URL website portfolio kamu yang sudah online */}
-                <a href="https://vercel.app" target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
-                <a href={gitLink} target="_blank" rel="noreferrer" className="btn secondary">GitHub</a>
+                <a href={demoLink} target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
+                <a href={`${gitLink}/portfolio-react`} target="_blank" rel="noreferrer" className="btn secondary">GitHub</a>
               </div>
             </div>
           </Reveal>
 
-          {/* PROJECT 2: Repair Service Website */}
+          {/* PROJECT 2 */}
           <Reveal className="project-card">
             <div className="project-image"><img src="/projects/repair.jpg" alt="Repair Service Website" /></div>
             <div className="project-content">
@@ -156,14 +189,13 @@ function App() {
               <p>Platform solusi digital layanan perbaikan. Dioptimalkan menggunakan Tailwind CSS.</p>
               <div className="project-tech"><span>React</span><span>Tailwind</span></div>
               <div className="project-buttons">
-                {/* GANTI DI SINI: Masukkan URL website project repair service kamu */}
-                <a href="https://vercel.app" target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
+                <a href={demoLink} target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
                 <a href={gitLink} target="_blank" rel="noreferrer" className="btn secondary">GitHub</a>
               </div>
             </div>
           </Reveal>
 
-          {/* PROJECT 3: Digital Product Catalog */}
+          {/* PROJECT 3 */}
           <Reveal className="project-card">
             <div className="project-image"><img src="/projects/ecommerce.jpg" alt="Digital Product Catalog" /></div>
             <div className="project-content">
@@ -171,8 +203,7 @@ function App() {
               <p>Platform katalog produk modern dengan fitur pencarian dan filter kategori instan.</p>
               <div className="project-tech"><span>React JS</span><span>Context API</span></div>
               <div className="project-buttons">
-                {/* GANTI DI SINI: Masukkan URL website katalog produk kamu */}
-                <a href="https://vercel.app" target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
+                <a href={demoLink} target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
                 <a href={gitLink} target="_blank" rel="noreferrer" className="btn secondary">GitHub</a>
               </div>
             </div>
@@ -180,7 +211,6 @@ function App() {
 
         </div>
       </section>
-
 
       {/* CONTACT */}
       <section id="contact" className="section">
@@ -189,7 +219,7 @@ function App() {
           <p className="section-intro">Silakan hubungi saya untuk kolaborasi atau sekadar menyapa!</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center', marginTop: '30px' }}>
             <p><FaEnvelope color="var(--accent)" /> <a href="mailto:danimanalu755@gmail.com" style={{ textDecoration: 'underline' }}>danimanalu755@gmail.com</a></p>
-            <p><FaPhone color="var(--accent)" /> <a href={waLink} target="_blank" rel="noreferrer" style={{ textDecoration: 'underline' }}>+62 851-2345-667</a></p>
+            <p><FaPhone color="var(--accent)" /> <a href={waLink} target="_blank" rel="noreferrer" style={{ textDecoration: 'underline' }}>+62 852-6027-7250</a></p>
             <p><FaMapMarkerAlt color="#E34F26" /> <span>Sumatera Utara, Indonesia</span></p>
           </div>
         </Reveal>

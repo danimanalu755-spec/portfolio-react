@@ -2,32 +2,30 @@
    VARIABLES & THEMES (MODERN & PREMIUM)
 ========================= */
 
-/* Tema Terang: Clean Soft Slate & Indigo */
 :root {
-  --bg-main: #f1f5f9;         /* Abu-abu sangat muda yang bersih & sejuk */
-  --bg-card: rgba(255, 255, 255, 0.75); /* Efek kaca transparan putih */
+  --bg-main: #f1f5f9;         
+  --bg-card: rgba(255, 255, 255, 0.75); 
   --bg-card-hover: #ffffff;
   --border-color: rgba(226, 232, 240, 0.8); 
-  --text-main: #0f172a;       /* Slate gelap untuk keterbacaan tinggi */
-  --text-muted: #475569;      /* Teks deskripsi abu-abu medium */
-  --accent: #4f46e5;          /* Indigo elektrik yang modern */
-  --accent-hover: #312e81;    /* Kontras teks untuk tombol primary */
-  --glass-blur: blur(12px);   /* Efek blur filter kaca */
+  --text-main: #0f172a;       
+  --text-muted: #475569;      
+  --accent: #4f46e5;          
+  --accent-hover: #312e81;    
+  --glass-blur: blur(12px);   
   --profile-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
 }
 
-/* Tema Gelap: Deep Cyber Ocean & Neon Cyan */
 [data-theme='dark'] {
-  --bg-main: #0b0f19;         /* Hitam kebiruan deep space yang mewah */
-  --bg-card: rgba(17, 24, 39, 0.65); /* Efek kaca transparan gelap */
+  --bg-main: #0b0f19;         
+  --bg-card: rgba(17, 24, 39, 0.65); 
   --bg-card-hover: #111827;
   --border-color: rgba(31, 41, 55, 0.6);
-  --text-main: #f8fafc;       /* Putih bersih */
-  --text-muted: #94a3b8;      /* Abu-abu kebiruan redup */
-  --accent: #06b6d4;          /* Neon Cyan berenergi tinggi */
-  --accent-hover: #0f172a;    /* Kontras teks untuk tombol primary */
+  --text-main: #f8fafc;       
+  --text-muted: #94a3b8;      
+  --accent: #06b6d4;          
+  --accent-hover: #0f172a;    
   --glass-blur: blur(12px);
-  --profile-shadow: 0 0 30px rgba(6, 182, 212, 0.35); /* Glow effect neon */
+  --profile-shadow: 0 0 30px rgba(6, 182, 212, 0.35); 
 }
 
 /* =========================
@@ -162,7 +160,6 @@ img {
   font-size: 14px;
 }
 
-/* Efek Teks Gradasi Modern */
 .hero h1 {
   font-size: 64px;
   line-height: 1.1;
@@ -218,7 +215,7 @@ img {
 
 .primary {
   background: var(--accent);
-  color: var(--accent-hover); /* Menjamin warna font terbaca jelas */
+  color: var(--accent-hover); 
 }
 
 .primary:hover {
@@ -249,10 +246,9 @@ img {
 .section h2 {
   font-size: 36px;
   margin-bottom: 20px;
-  color: var(--text-main); /* TAMBAHKAN BARIS INI */
-  transition: color 0.3s ease; /* Tambahan agar perubahan warna terasa halus saat tema diganti */
+  color: var(--text-main);
+  transition: color 0.3s ease;
 }
-
 
 .section p {
   max-width: 700px;
@@ -410,20 +406,22 @@ footer {
 }
 
 /* =========================
-   ANIMATIONS
+   ANIMATIONS & REVEAL EFFECT
 ========================= */
 
-.hero-text, .section {
-  animation: fadeUp 0.8s ease-out;
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-image {
   animation: fadeIn 1s ease-out;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -528,20 +526,4 @@ footer {
     text-align: center;
     width: 100%;
   }
-  /* =========================
-   SINKRONISASI ANIMASI REVEAL SCROLL
-========================= */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* Kelas ini akan otomatis dipicu aktif oleh React IntersectionObserver */
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 }
