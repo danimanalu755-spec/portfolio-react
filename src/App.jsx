@@ -1,4 +1,4 @@
-import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaGitAlt, FaGithub, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaGitAlt, FaGithub, FaEnvelope, FaPhone, FaMapMarkerAlt, FaSun, FaMoon } from 'react-icons/fa';
 import { SiTailwindcss } from 'react-icons/si';
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
@@ -8,12 +8,11 @@ function Reveal({ children, className = '' }) {
   const elementRef = useRef(null)
 
   useEffect(() => {
-    const element = elementRef.current
-    if (!element) return
+    if (!elementRef.current) return;
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
-    }, { threshold: 0.15 })
-    observer.observe(element)
+    }, { threshold: 0.1 })
+    observer.observe(elementRef.current)
     return () => observer.disconnect()
   }, [])
 
@@ -29,20 +28,41 @@ function App() {
   const closeMenu = () => setMenuOpen(false)
   const gitLink = "https://github.com";
 
+  const waNumber = "628512345667"; 
+  const waMessage = encodeURIComponent("Halo Dani, saya tertarik untuk bekerja sama.");
+  const waLink = `https://wa.me{waNumber}?text=${waMessage}`;
+
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    return savedTheme ? savedTheme : 'dark';
+  });
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
+
   return (
     <div className="portfolio">
       {/* NAVBAR */}
       <nav className="navbar">
         <h2>Dani Frandi Manalu</h2>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
-          {menuOpen ? '✕' : '☰'}
-        </button>
-        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <a href="#home" onClick={closeMenu}>Home</a>
-          <a href="#about" onClick={closeMenu}>About</a>
-          <a href="#skills" onClick={closeMenu}>Skills</a>
-          <a href="#projects" onClick={closeMenu}>Projects</a>
-          <a href="#contact" onClick={closeMenu}>Contact</a>
+        <div className="nav-container">
+          <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+            <a href="#home" onClick={closeMenu}>Home</a>
+            <a href="#about" onClick={closeMenu}>About</a>
+            <a href="#skills" onClick={closeMenu}>Skills</a>
+            <a href="#projects" onClick={closeMenu}>Projects</a>
+            <a href="#contact" onClick={closeMenu}>Contact</a>
+          </div>
+          <div className="nav-actions">
+            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="theme-toggle">
+              {theme === 'dark' ? <FaSun color="#F59E0B" /> : <FaMoon />}
+            </button>
+            <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? '✕' : '☰'}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -55,7 +75,7 @@ function App() {
           <p className="description">Saya sedang membangun kemampuan dalam pengembangan website menggunakan React, JavaScript, HTML, dan CSS.</p>
           <div className="buttons">
             <a href="#projects" className="btn primary">Lihat Project</a>
-            <a href="#contact" className="btn secondary">Hubungi Saya</a>
+            <a href={waLink} target="_blank" rel="noreferrer" className="btn secondary">Hubungi Saya</a>
           </div>
         </Reveal>
         <Reveal className="hero-image">
@@ -78,66 +98,89 @@ function App() {
           <p className="section-intro">Teknologi yang sedang saya pelajari dan gunakan dalam pengembangan website.</p>
         </Reveal>
         <div className="skills">
-          <Reveal className="skill-card"><div className="skill-icon"><FaHtml5 color="#E34F26" size="40px" /></div><h3>HTML</h3><p>Struktur website</p></Reveal>
-          <Reveal className="skill-card"><div className="skill-icon"><FaCss3Alt color="#1572B6" size="40px" /></div><h3>CSS</h3><p>Responsive design</p></Reveal>
-          <Reveal className="skill-card"><div className="skill-icon"><FaJsSquare color="#F7DF1E" size="40px" /></div><h3>JavaScript</h3><p>Logika website</p></Reveal>
-          <Reveal className="skill-card"><div className="skill-icon"><FaReact color="#61DAFB" size="40px" /></div><h3>React JS</h3><p>Aplikasi web modern</p></Reveal>
-          <Reveal className="skill-card"><div className="skill-icon"><FaGitAlt color="#F05032" size="40px" /></div><h3>Git</h3><p>Version control</p></Reveal>
-          <Reveal className="skill-card"><div className="skill-icon"><FaGithub color="#181717" size="40px" /></div><h3>GitHub</h3><p>Kelola project</p></Reveal>
+          <Reveal className="skill-card">
+            <div className="skill-icon"><FaHtml5 color={theme === 'dark' ? 'var(--accent)' : '#E34F26'} size="40px" /></div>
+            <h3>HTML</h3><p>Struktur website</p>
+          </Reveal>
+          <Reveal className="skill-card">
+            <div className="skill-icon"><FaCss3Alt color={theme === 'dark' ? 'var(--accent)' : '#1572B6'} size="40px" /></div>
+            <h3>CSS</h3><p>Responsive design</p>
+          </Reveal>
+          <Reveal className="skill-card">
+            <div className="skill-icon"><FaJsSquare color={theme === 'dark' ? 'var(--accent)' : '#F7DF1E'} size="40px" /></div>
+            <h3>JavaScript</h3><p>Logika website</p>
+          </Reveal>
+          <Reveal className="skill-card">
+            <div className="skill-icon"><FaReact color={theme === 'dark' ? 'var(--accent)' : '#61DAFB'} size="40px" /></div>
+            <h3>React JS</h3><p>Aplikasi web modern</p>
+          </Reveal>
+          <Reveal className="skill-card">
+            <div className="skill-icon"><FaGitAlt color={theme === 'dark' ? 'var(--accent)' : '#F05032'} size="40px" /></div>
+            <h3>Git</h3><p>Version control</p>
+          </Reveal>
+          <Reveal className="skill-card">
+            <div className="skill-icon"><FaGithub color={theme === 'dark' ? 'var(--accent)' : '#181717'} size="40px" /></div>
+            <h3>GitHub</h3><p>Kelola project</p>
+          </Reveal>
         </div>
       </section>
 
-      {/* PROJECTS (VERTIKAL) */}
+            {/* PROJECTS */}
       <section id="projects" className="section">
         <Reveal>
           <h2>My Projects</h2>
           <p className="section-intro">Beberapa project yang saya buat selama belajar web development.</p>
         </Reveal>
-
-        <div className="projects" style={{ display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '800px', margin: '0 auto' }}>
-          {/* PROJECT 1 */}
+        <div className="projects">
+          
+          {/* PROJECT 1: Personal Portfolio */}
           <Reveal className="project-card">
             <div className="project-image"><img src="/projects/portfolio.jpg" alt="Personal Portfolio" /></div>
             <div className="project-content">
               <h3>Personal Portfolio</h3>
-              <p>Website portofolio responsif yang dirancang untuk membangun personal branding secara profesional. Dilengkapi dengan animasi scroll interaktif modern (Reveal Effect).</p>
+              <p>Website portofolio responsif dengan animasi scroll interaktif modern (Reveal Effect).</p>
               <div className="project-tech"><span>React</span><span>JavaScript</span><span>CSS3</span></div>
               <div className="project-buttons">
-                <a href="#" className="btn primary">Live Demo</a>
+                {/* GANTI DI SINI: Masukkan URL website portfolio kamu yang sudah online */}
+                <a href="https://vercel.app" target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
                 <a href={gitLink} target="_blank" rel="noreferrer" className="btn secondary">GitHub</a>
               </div>
             </div>
           </Reveal>
 
-          {/* PROJECT 2 */}
+          {/* PROJECT 2: Repair Service Website */}
           <Reveal className="project-card">
             <div className="project-image"><img src="/projects/repair.jpg" alt="Repair Service Website" /></div>
             <div className="project-content">
               <h3>Repair Service Website</h3>
-              <p>Platform solusi digital yang mendigitalisasi layanan perbaikan dengan menghubungkan pelanggan dan teknisi secara instan. Dioptimalkan menggunakan Tailwind CSS.</p>
+              <p>Platform solusi digital layanan perbaikan. Dioptimalkan menggunakan Tailwind CSS.</p>
               <div className="project-tech"><span>React</span><span>Tailwind</span></div>
               <div className="project-buttons">
-                <a href="#" className="btn primary">Live Demo</a>
+                {/* GANTI DI SINI: Masukkan URL website project repair service kamu */}
+                <a href="https://vercel.app" target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
                 <a href={gitLink} target="_blank" rel="noreferrer" className="btn secondary">GitHub</a>
               </div>
             </div>
           </Reveal>
 
-          {/* PROJECT 3 */}
+          {/* PROJECT 3: Digital Product Catalog */}
           <Reveal className="project-card">
             <div className="project-image"><img src="/projects/ecommerce.jpg" alt="Digital Product Catalog" /></div>
             <div className="project-content">
               <h3>Digital Product Catalog</h3>
-              <p>Platform katalog produk modern dengan fitur pencarian dan filter kategori instan. Dirancang untuk mengoptimalkan pengalaman belanja digital yang cepat.</p>
-              <div className="project-tech"><span>React JS</span><span>Context API</span><span>CSS Grid</span></div>
+              <p>Platform katalog produk modern dengan fitur pencarian dan filter kategori instan.</p>
+              <div className="project-tech"><span>React JS</span><span>Context API</span></div>
               <div className="project-buttons">
-                <a href="#" className="btn primary">Live Demo</a>
+                {/* GANTI DI SINI: Masukkan URL website katalog produk kamu */}
+                <a href="https://vercel.app" target="_blank" rel="noreferrer" className="btn primary">Live Demo</a>
                 <a href={gitLink} target="_blank" rel="noreferrer" className="btn secondary">GitHub</a>
               </div>
             </div>
           </Reveal>
+
         </div>
       </section>
+
 
       {/* CONTACT */}
       <section id="contact" className="section">
@@ -145,9 +188,9 @@ function App() {
           <h2>Hubungi Saya</h2>
           <p className="section-intro">Silakan hubungi saya untuk kolaborasi atau sekadar menyapa!</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center', marginTop: '30px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaEnvelope color="#61DAFB" size="20px" /><span>danimanalu755@gmail.com</span></div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaPhone color="#61DAFB" size="20px" /><span>+62 85`12345667`</span></div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><FaMapMarkerAlt color="#E34F26" size="20px" /><span>Sumatera Utara, Indonesia</span></div>
+            <p><FaEnvelope color="var(--accent)" /> <a href="mailto:danimanalu755@gmail.com" style={{ textDecoration: 'underline' }}>danimanalu755@gmail.com</a></p>
+            <p><FaPhone color="var(--accent)" /> <a href={waLink} target="_blank" rel="noreferrer" style={{ textDecoration: 'underline' }}>+62 851-2345-667</a></p>
+            <p><FaMapMarkerAlt color="#E34F26" /> <span>Sumatera Utara, Indonesia</span></p>
           </div>
         </Reveal>
       </section>
