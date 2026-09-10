@@ -55,6 +55,7 @@ function App() {
     }
   });
 
+
   useEffect(() => {
     try {
       document.body.setAttribute('data-theme', theme);
@@ -75,6 +76,7 @@ function App() {
             <a href="#about" onClick={closeMenu}>About</a>
             <a href="#skills" onClick={closeMenu}>Skills</a>
             <a href="#projects" onClick={closeMenu}>Projects</a>
+            <a href="#experience" onClick={closeMenu}>Experience</a>
             <a href="#contact" onClick={closeMenu}>Contact</a>
           </div>
           <div className="nav-actions">
@@ -211,6 +213,54 @@ function App() {
 
         </div>
       </section>
+            {/* PENGALAMAN & PENDIDIKAN (EXPERIENCE) */}
+      <section id="experience" className="section">
+        <Reveal>
+          <h2>Experience & Education</h2>
+          <p className="section-intro">Riwayat pendidikan dan pengalaman kerja yang telah saya lalui.</p>
+        </Reveal>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginTop: '40px', textAlign: 'left' }}>
+          
+          {/* KOLOM PENGALAMAN KERJA */}
+          <Reveal className="skill-card" style={{ padding: '25px', display: 'block' }}>
+            <h3 style={{ borderBottom: '2px solid var(--accent)', paddingBottom: '10px', marginBottom: '15px' }}>💼 Pengalaman Kerja</h3>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <h4 style={{ margin: '0 0 5px 0' }}>IT Support</h4>
+              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>RSU MITRA MEDIKA AMPLAS MEDAN | 2023 - Sekarang</p>
+              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Sebagai administrator SIMRS,•	Services Desk Technician,•	
+                Mengembangkan konsep proyek dan menjaga alur kerja yang optimal </p>
+            </div>
+
+            <div>
+              <h4 style={{ margin: '0 0 5px 0' }}>STAFF IT</h4>
+              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>PT. INOCYCLE TEHCNOLOGY GROUP .Tbk | 2021 - 2022</p>
+              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Menjadi IT support menangani segala trouble jaringan , perangkat keras dan lunak komputer
+                ,serta memastikan semua kebutuhan user terpenuhi.</p>
+            </div>
+          </Reveal>
+
+          {/* KOLOM RIWAYAT PENDIDIKAN */}
+          <Reveal className="skill-card" style={{ padding: '25px', display: 'block' }}>
+            <h3 style={{ borderBottom: '2px solid var(--accent)', paddingBottom: '10px', marginBottom: '15px' }}>🎓 Riwayat Pendidikan</h3>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <h4 style={{ margin: '0 0 5px 0' }}>S1 Teknik Informatika</h4>
+              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>STMIK BUDI DARMA MEDAN | 2013 - 2017</p>
+              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Lulus dengan IPK 3.38. Aktif dalam Organisasi Pemograman web club dan Organisasi Microcontroller Club.</p>
+            </div>
+
+            <div>
+              <h4 style={{ margin: '0 0 5px 0' }}>IPA II</h4>
+              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>SMA N 1 BARUS | 2009 - 2012</p>
+              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Mempelajari ilmu komputer masih pengenalan dasar.</p>
+            </div>
+          </Reveal>
+
+        </div>
+      </section>
+
 
       {/* CONTACT */}
       <section id="contact" className="section">
