@@ -526,4 +526,208 @@ footer {
     text-align: center;
     width: 100%;
   }
+
+/* =========================================================================
+   STYLE TIMELINE VERTIKAL ESTETIK 
+   ========================================================================= */
+.timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 40px auto 0 auto;
+  padding: 10px 0;
 }
+
+/* Garis vertikal utama di sebelah kiri */
+.timeline-container::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background-color: var(--accent);
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  opacity: 0.3;
+}
+
+/* Kotak tiap item timeline */
+.timeline-item {
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+/* Titik lingkaran pada garis vertikal */
+.timeline-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 13px;
+  top: 6px;
+  background-color: var(--portfolio-bg, #111); /* Menyesuaikan background dasar */
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+/* Efek menyala saat item disorot (hover) */
+.timeline-item:hover .timeline-dot {
+  background-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* Detail konten di dalam kartu */
+.timeline-content {
+  padding: 20px;
+  background: var(--card-bg, rgba(255, 255, 255, 0.05));
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='light'] .timeline-content {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-item:hover .timeline-content {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.timeline-content h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.15rem;
+}
+
+.timeline-meta {
+  color: var(--accent);
+  margin: 0 0 10px 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Judul Kolom (Mencegah tabrakan style card lama) */
+.timeline-section-title {
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  text-align: left;
+  padding-left: 20px;
+}
+/* =========================================================================
+   STYLE TIMELINE VERTIKAL ESTETIK DANI PORTFOLIO
+   ========================================================================= */
+.timeline-container {
+  position: relative;
+  margin: 20px auto 0 auto;
+  padding: 10px 0;
+}
+
+/* Garis vertikal utama di sebelah kiri */
+.timeline-container::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background-color: var(--accent, #0070f3);
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  opacity: 0.25;
+}
+
+/* Kontainer per baris info */
+.timeline-item {
+  position: relative;
+  padding-left: 45px;
+  margin-bottom: 35px;
+  text-align: left;
+}
+
+/* Lingkaran titik pada timeline */
+.timeline-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 14px;
+  top: 6px;
+  background-color: #111; /* Default background gelap */
+  border: 3px solid var(--accent, #0070f3);
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+}
+
+/* Deteksi perubahan background titik saat mode terang (light mode) */
+[data-theme='light'] .timeline-dot {
+  background-color: #fff;
+}
+
+/* Kartu Box Konten di dalam timeline */
+.timeline-content {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='light'] .timeline-content {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* Efek Sorot Interaktif (Hover Effect) */
+.timeline-item:hover .timeline-dot {
+  background-color: var(--accent, #0070f3);
+  box-shadow: 0 0 10px var(--accent, #0070f3);
+  transform: scale(1.2);
+}
+
+.timeline-item:hover .timeline-content {
+  transform: translateX(6px);
+  border-color: var(--accent, #0070f3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.timeline-meta {
+  color: var(--accent, #0070f3);
+  margin: 0 0 10px 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.timeline-section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+

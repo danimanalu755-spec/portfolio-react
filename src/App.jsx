@@ -213,53 +213,86 @@ function App() {
 
         </div>
       </section>
-            {/* PENGALAMAN & PENDIDIKAN (EXPERIENCE) */}
+
+      {/* EXPERIENCE & EDUCATION SECTION (TIMELINE VERTIKAL ESTETIK) */}
       <section id="experience" className="section">
         <Reveal>
           <h2>Experience & Education</h2>
-          <p className="section-intro">Riwayat pendidikan dan pengalaman kerja yang telah saya lalui.</p>
+          <p className="section-intro">Riwayat pendidikan dan pengalaman kerja profesional yang telah saya lalui.</p>
         </Reveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginTop: '40px', textAlign: 'left' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', marginTop: '40px' }}>
           
           {/* KOLOM PENGALAMAN KERJA */}
-          <Reveal className="skill-card" style={{ padding: '25px', display: 'block' }}>
-            <h3 style={{ borderBottom: '2px solid var(--accent)', paddingBottom: '10px', marginBottom: '15px' }}>💼 Pengalaman Kerja</h3>
-            
-            <div style={{ marginBottom: '20px' }}>
-              <h4 style={{ margin: '0 0 5px 0' }}>IT Support</h4>
-              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>RSU MITRA MEDIKA AMPLAS MEDAN | 2023 - Sekarang</p>
-              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Sebagai administrator SIMRS,•	Services Desk Technician,•	
-                Mengembangkan konsep proyek dan menjaga alur kerja yang optimal </p>
-            </div>
+          <div>
+            <h3 className="timeline-section-title">💼 Pengalaman Kerja</h3>
+            <div className="timeline-container">
+              
+              {/* ITEM KERJA 1 */}
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <h4>IT Support</h4>
+                  <p className="timeline-meta">RSU MITRA MEDIKA AMPLAS MEDAN | 2023 - Sekarang</p>
+                  <ul style={{ margin: '5px 0 0 0', paddingLeft: '18px', fontSize: '0.9rem', opacity: 0.8, lineHeight: '1.6' }}>
+                    <li>Sebagai administrator SIMRS</li>
+                    <li>Services Desk Technician</li>
+                    <li>Mengembangkan konsep proyek dan menjaga alur kerja yang optimal</li>
+                  </ul>
+                </div>
+              </div>
 
-            <div>
-              <h4 style={{ margin: '0 0 5px 0' }}>STAFF IT</h4>
-              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>PT. INOCYCLE TEHCNOLOGY GROUP .Tbk | 2021 - 2022</p>
-              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Menjadi IT support menangani segala trouble jaringan , perangkat keras dan lunak komputer
-                ,serta memastikan semua kebutuhan user terpenuhi.</p>
+              {/* ITEM KERJA 2 */}
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <h4>STAFF IT</h4>
+                  <p className="timeline-meta">PT. INOCYCLE TECHNOLOGY GROUP .Tbk | 2021 - 2022</p>
+                  <p className="timeline-desc">
+                    Menjadi IT support menangani segala trouble jaringan, perangkat keras dan lunak komputer, serta memastikan semua kebutuhan user terpenuhi.
+                  </p>
+                </div>
+              </div>
+
             </div>
-          </Reveal>
+          </div>
 
           {/* KOLOM RIWAYAT PENDIDIKAN */}
-          <Reveal className="skill-card" style={{ padding: '25px', display: 'block' }}>
-            <h3 style={{ borderBottom: '2px solid var(--accent)', paddingBottom: '10px', marginBottom: '15px' }}>🎓 Riwayat Pendidikan</h3>
-            
-            <div style={{ marginBottom: '20px' }}>
-              <h4 style={{ margin: '0 0 5px 0' }}>S1 Teknik Informatika</h4>
-              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>STMIK BUDI DARMA MEDAN | 2013 - 2017</p>
-              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Lulus dengan IPK 3.38. Aktif dalam Organisasi Pemograman web club dan Organisasi Microcontroller Club.</p>
-            </div>
+          <div>
+            <h3 className="timeline-section-title">🎓 Riwayat Pendidikan</h3>
+            <div className="timeline-container">
+              
+              {/* ITEM PENDIDIKAN 1 */}
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <h4>S1 Teknik Informatika</h4>
+                  <p className="timeline-meta">STMIK BUDI DARMA MEDAN | 2013 - 2017</p>
+                  <p className="timeline-desc">
+                    Lulus dengan IPK 3.38. Aktif dalam Organisasi Pemrograman web club dan Organisasi Microcontroller 
+                    Club. Saya juga menjadi wakil ketua dalam satu organisasi mahasiswa Kristen yaitu KMK (Keluarga Mahasiswa Kristen) di kampus saya.
+                  </p>
+                </div>
+              </div>
 
-            <div>
-              <h4 style={{ margin: '0 0 5px 0' }}>IPA II</h4>
-              <p style={{ color: 'var(--accent)', margin: '0', fontSize: '0.9rem' }}>SMA N 1 BARUS | 2009 - 2012</p>
-              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '5px' }}>Mempelajari ilmu komputer masih pengenalan dasar.</p>
+              {/* ITEM PENDIDIKAN 2 */}
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <h4>IPA II</h4>
+                  <p className="timeline-meta">SMA N 1 BARUS | 2009 - 2012</p>
+                  <p className="timeline-desc">
+                    Mempelajari ilmu komputer masih pengenalan dasar.
+                  </p>
+                </div>
+              </div>
+
             </div>
-          </Reveal>
+          </div>
 
         </div>
       </section>
+
 
 
       {/* CONTACT */}
